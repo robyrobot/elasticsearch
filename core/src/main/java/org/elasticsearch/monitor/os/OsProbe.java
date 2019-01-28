@@ -207,12 +207,14 @@ public class OsProbe {
             // matching is lazy; this can not happen in an assert
             // as assertions might not be enabled
             final boolean matches = matcher.matches();
-            assert matches : line;
-            // at this point we have captured the subsystems and the
-            // control group
-            final String[] controllers = matcher.group(1).split(",");
-            for (final String controller : controllers) {
-                controllerMap.put(controller, matcher.group(2));
+            //assert matches : line;
+            if (matches) {
+                // at this point we have captured the subsystems and the
+                // control group
+                final String[] controllers = matcher.group(1).split(",");
+                for (final String controller : controllers) {
+                    controllerMap.put(controller, matcher.group(2));
+                }
             }
         }
         return controllerMap;
